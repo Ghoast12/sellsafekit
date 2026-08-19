@@ -3,192 +3,327 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SellSafeKit — GPSR Bulk Prep Kit für Etsy-Seller</title>
-  <meta name="description" content="DIY-Toolkit für Etsy-Seller: GPSR-relevante Listing-Angaben strukturieren, Produktgruppen bilden und Copy-Paste-Texte vorbereiten. Keine Rechtsberatung." />
+  <title>SellSafeKit — Etsy GPSR Bulk Prep Kit</title>
+  <meta name="description" content="Bereite GPSR-relevante Etsy-Listing-Angaben schneller vor: Produktgruppen, Checkliste, Copy-Paste-Text und Bulk-Sheet. Keine Rechtsberatung." />
   <style>
     :root {
-      --bg:#f7f4ee;
-      --ink:#1f2520;
-      --muted:#687066;
-      --line:#d8d0c3;
-      --card:#fffdf8;
-      --accent:#2d6a4f;
-      --accent2:#123c2b;
-      --warn:#8a4b12;
+      --bg:#fbfaf7;
+      --paper:#fff;
+      --soft:#f2efe8;
+      --ink:#171512;
+      --muted:#615d55;
+      --line:rgba(23,21,18,.12);
+      --green:#2f6b4f;
+      --green2:#173b2b;
+      --lime:#c9f2b1;
+      --blue:#1f5eff;
+      --warn:#9b5a16;
+      --bad:#9f2f2f;
+      --shadow:0 24px 70px rgba(23,21,18,.08),0 2px 12px rgba(23,21,18,.05);
     }
 
     * { box-sizing:border-box; }
 
+    html { scroll-behavior:smooth; }
+
     body {
       margin:0;
-      font-family: ui-serif, Georgia, serif;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg);
       color:var(--ink);
-      line-height:1.55;
+      line-height:1.5;
     }
 
-    .site-header {
+    a { color:inherit; }
+
+    .wrap {
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 22px;
+    }
+
+    .top {
       position:sticky;
       top:0;
-      z-index:2;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:18px 6vw;
-      background:rgba(247,244,238,.92);
-      backdrop-filter:blur(8px);
+      z-index:5;
+      background:rgba(251,250,247,.88);
+      backdrop-filter:blur(14px);
       border-bottom:1px solid var(--line);
     }
 
+    .nav {
+      height:68px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
     .brand {
-      font-weight:800;
-      color:var(--ink);
+      font-weight:850;
+      letter-spacing:-.04em;
+      font-size:22px;
       text-decoration:none;
-      font-size:1.25rem;
     }
 
-    nav {
+    .brand span { color:var(--green); }
+
+    .links {
       display:flex;
-      gap:20px;
-    }
-
-    nav a {
+      gap:24px;
+      align-items:center;
+      font-size:14px;
+      font-weight:650;
       color:var(--muted);
-      text-decoration:none;
     }
 
-    .hero,
-    .problem,
-    .checker,
-    .kit,
-    .faq,
-    footer {
-      max-width:1040px;
-      margin:0 auto;
-      padding:70px 24px;
-    }
+    .links a { text-decoration:none; }
 
-    .hero {
-      padding-top:95px;
-    }
-
-    .eyebrow {
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      color:var(--accent);
-      font:700 .78rem ui-sans-serif, system-ui, sans-serif;
-    }
-
-    h1 {
-      font-size:clamp(2.3rem, 6vw, 5.2rem);
-      line-height:.98;
-      max-width:900px;
-      margin:10px 0 22px;
-    }
-
-    h2 {
-      font-size:clamp(1.8rem, 3vw, 3rem);
-      line-height:1.08;
-      margin:0 0 16px;
-    }
-
-    .lead {
-      font-size:1.25rem;
-      max-width:760px;
-      color:#3e463f;
-    }
-
-    .hero-actions {
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-      margin:30px 0;
-    }
-
-    .button {
+    .btn {
       display:inline-flex;
       align-items:center;
       justify-content:center;
       min-height:46px;
-      padding:12px 18px;
+      padding:0 18px;
       border-radius:999px;
       text-decoration:none;
-      font:700 .95rem ui-sans-serif, system-ui, sans-serif;
-      border:1px solid var(--accent2);
+      font-weight:800;
+      border:1px solid transparent;
       cursor:pointer;
+      transition:.18s transform,.18s background;
     }
+
+    .btn:hover { transform:translateY(-1px); }
 
     .primary {
-      background:var(--accent2);
-      color:white;
+      background:var(--green2);
+      color:#fff;
     }
+
+    .primary:hover { background:#0f2d20; }
 
     .secondary {
-      color:var(--accent2);
-      background:transparent;
+      background:var(--lime);
+      color:#163300;
     }
 
-    .notice,
-    .output {
+    .ghost {
+      border-color:var(--line);
+      background:#fff;
+      color:var(--ink);
+    }
+
+    .hero {
+      padding:86px 0 58px;
+    }
+
+    .badge {
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
       border:1px solid var(--line);
-      background:var(--card);
-      padding:16px;
-      border-radius:18px;
+      background:#fff;
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:13px;
+      font-weight:750;
+      color:var(--green2);
+    }
+
+    h1 {
+      font-size:clamp(46px,7vw,84px);
+      line-height:.92;
+      letter-spacing:-.065em;
+      margin:22px 0 20px;
+      max-width:970px;
+    }
+
+    h2 {
+      font-size:clamp(32px,4vw,54px);
+      line-height:.96;
+      letter-spacing:-.055em;
+      margin:0 0 14px;
+    }
+
+    .lead {
+      font-size:clamp(18px,2vw,22px);
+      max-width:780px;
+      color:var(--muted);
+      font-weight:480;
+    }
+
+    .actions {
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
+
+    .fine {
+      font-size:13px;
+      color:var(--muted);
+      max-width:760px;
+      margin-top:18px;
+    }
+
+    .hero-grid {
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:28px;
+      align-items:start;
+      margin-top:44px;
+    }
+
+    .panel {
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .minihead {
+      display:flex;
+justify-content:space-between;
+      gap:12px;
+      padding:15px 18px;
+      border-bottom:1px solid var(--line);
+      font-size:13px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    .table { padding:14px; }
+
+    .row {
+      display:grid;
+      grid-template-columns:1.1fr .75fr .9fr;
+      gap:10px;
+      align-items:center;
+      padding:12px;
+      border-bottom:1px solid rgba(23,21,18,.08);
+      font-size:14px;
+    }
+
+    .row:last-child { border-bottom:0; }
+
+    .status {
+      border-radius:999px;
+      padding:5px 8px;
+      width:max-content;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .ok {
+      background:#e8f7ec;
+      color:#17623a;
+    }
+
+    .todo {
+      background:#fff3d8;
+      color:#875100;
+    }
+
+    .risk {
+      background:#ffe7e2;
+      color:#9f2f2f;
+    }
+    .section {
+      padding:72px 0;
+    }
+
+    .split {
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:38px;
+    }
+
+    .cards {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+
+    .card {
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px;
+    }
+
+    .card strong {
+      display:block;
+      font-size:18px;
+      margin-bottom:8px;
+      letter-spacing:-.02em;
+    }
+
+    .card p {
+      margin:0;
       color:var(--muted);
     }
 
-    .problem {
+    .soft {
+      background:var(--soft);
+      border-radius:34px;
+      padding:54px;
+    }
+
+    .steps {
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:34px;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      counter-reset:step;
     }
 
-    .checks {
-      margin:0;
-      padding:0;
-      list-style:none;
-    }
-
-    .checks li,
-    .columns li {
-      margin:10px 0;
-    }
-
-    .checks li:before,
-    .columns li:before {
-      content:'✓ ';
-      color:var(--accent);
-      font-weight:900;
-    }
-
-    .checker,
-    .kit {
-      background:var(--card);
+    .step {
+      background:#fff;
       border:1px solid var(--line);
-      border-radius:30px;
-      margin-top:40px;
+      border-radius:20px;
+      padding:20px;
+      counter-increment:step;
+    }
+
+    .step:before {
+      content:counter(step);
+      display:grid;
+      place-items:center;
+      width:30px;
+      height:30px;
+      border-radius:50%;
+      background:var(--green2);
+      color:#fff;
+      font-weight:900;
+      margin-bottom:16px;
+    }
+
+    .checker {
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:20px;
     }
 
     .form {
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:16px;
-      margin-top:24px;
+      gap:14px;
     }
 
     .form label {
+      font-size:13px;
+      font-weight:800;
+      color:#34302a;
       display:grid;
       gap:6px;
-      font:700 .9rem ui-sans-serif, system-ui, sans-serif;
     }
 
     .form input,
     .form select {
-      width:100%;
-      padding:12px 13px;
+      min-height:44px;
+      padding:10px 12px;
       border:1px solid var(--line);
       border-radius:12px;
-      background:white;
+      background:#fff;
       font:inherit;
     }
 
@@ -197,300 +332,133 @@
     }
 
     .output {
-      margin-top:18px;
       display:none;
+      margin-top:14px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
     }
 
     .output.show {
       display:block;
     }
 
-    .price {
-      font-size:2rem;
-      font-weight:900;
-      margin:.2rem 0;
+    .kitbox {
+      background:var(--green2);
+      color:#fff;
+      border-radius:34px;
+      padding:48px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:28px;
     }
 
-    .columns {
-      display:grid;
-grid-template-columns:1fr 1fr;
-      gap:24px;
+    .kitbox p {
+      color:rgba(255,255,255,.76);
+    }
+
+    .price {
+      font-size:46px;
+      font-weight:900;
+      letter-spacing:-.04em;
+    }
+
+    .kitlist {
+      columns:2;
+      list-style:none;
+      padding:0;
+      margin:20px 0;
+    }
+
+    .kitlist li {
+      break-inside:avoid;
+      margin:0 0 10px;
+    }
+
+    .kitlist li:before {
+      content:'✓ ';
+      color:var(--lime);
+      font-weight:900;
+    }
+
+    .warning {
+      background:#fff8e8;
+      border:1px solid #efd7a2;
+      color:#62400b;
+      border-radius:18px;
+      padding:16px;
     }
 
     .faq details {
+      background:#fff;
       border-top:1px solid var(--line);
-      padding:18px 0;
+      padding:20px;
     }
 
     .faq summary {
-      font-weight:800;
+      font-weight:850;
       cursor:pointer;
     }
 
-    footer {
-      color:var(--muted);
+    .footer {
+      padding:42px 0;
       border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:14px;
     }
 
-    @media(max-width:760px) {
-      nav { display:none; }
-      .problem,
-      .form,
-      .columns {
+    @media(max-width:850px) {
+      .links a:not(.btn) {
+        display:none;
+      }
+
+      .hero-grid,
+      .split,
+      .checker,
+      .kitbox {
         grid-template-columns:1fr;
       }
-      .hero,
-      .problem,
-      .checker,
-      .kit,
-      .faq,
-      footer {
-        padding:46px 18px;
+
+      .cards,
+      .steps {
+        grid-template-columns:1fr;
       }
-      .hero {
-        padding-top:70px;
+
+      .form {
+        grid-template-columns:1fr;
+      }
+
+      .kitlist {
+        columns:1;
+      }
+
+      h1 {
+        font-size:44px;
+      }
+
+      .section {
+        padding:48px 0;
+      }
+
+      .soft,
+      .kitbox {
+        padding:28px;
       }
     }
   </style>
 </head>
 
 <body>
-  <header class="site-header">
-    <a class="brand" href="#top">SellSafeKit</a>
-    <nav>
-      <a href="#check">Gratis Check</a>
-      <a href="#kit">Kit</a>
-      <a href="#faq">FAQ</a>
-    </nav>
+  <header class="top">
+    <div class="wrap nav">
+      <a class="brand" href="#top">SellSafe<span>Kit</span></a>
+      <div class="links">
+        <a href="#workflow">Workflow</a>
+        <a href="#check">Gratis Check</a>
+        <a href="#kit">Kit</a>
+        <a class="btn secondary" href="#waitlist">Warteliste</a>
+      </div>
+    </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <p class="eyebrow">Für Etsy-Seller mit vielen physischen Listings</p>
-
-      <h1>Bereite GPSR-relevante Etsy-Angaben schneller und strukturierter vor.</h1>
-
-      <p class="lead">
-        SellSafeKit hilft dir, Produktgruppen, Herstellerblock, Sicherheits-/Warnhinweise
-        und Copy-Paste-Texte für deine Listings vorzubereiten — ohne Login, ohne Etsy-Zugriff,
-        ohne Rechtsberatungsversprechen.
-      </p>
-
-      <div class="hero-actions">
-        <a class="button primary" href="#check">Kostenlosen Listing Check starten</a>
-        <a class="button secondary" href="#kit">Bulk Prep Kit ansehen</a>
-      </div>
-
-      <p class="notice">
-        Hinweis: Dieses Tool bietet DIY-Vorlagen und Textvorschläge. Es ersetzt keine Rechtsberatung,
-        Responsible Person, Zertifizierung oder Fachprüfung.
-      </p>
-    </section>
-
-    <section class="problem">
-      <div>
-        <h2>Das Problem</h2>
-        <p>
-          Viele Etsy-Shops müssen dutzende oder hunderte Listings manuell prüfen.
-          Was fehlt? Welche Angaben gehören wohin? Welche Texte lassen sich gruppenweise vorbereiten?
-        </p>
-      </div>
-
-      <ul class="checks">
-        <li>Produktgruppen statt jedes Listing einzeln neu denken</li>
-        <li>DE/EN-Textbausteine für Low-Risk-Kategorien</li>
-        <li>CSV-/Google-Sheet-Workflow für 50+ Listings</li>
-        <li>Klare Warnung bei höheren Risikokategorien</li>
-      </ul>
-    </section>
-
-    <section id="check" class="checker">
-      <div class="section-head">
-        <p class="eyebrow">Gratis Lead-Magnet</p>
-        <h2>GPSR Listing Check</h2>
-        <p>Gib ein Beispielprodukt ein. Die Ausgabe läuft nur in deinem Browser.</p>
-      </div>
-
-      <form id="gpsrForm" class="form">
-        <label>
-          Produktname
-          <input name="product" required placeholder="z. B. handgemachte Sojawachskerze" />
-        </label>
-
-        <label>
-          Kategorie
-          <select name="category">
-            <option>Kerzen & Deko</option>
-            <option>Schmuck</option>
-            <option>Textilien</option>
-            <option>Papierwaren</option>
-            <option>Print-on-Demand</option>
-            <option>Kinderprodukt / Spielzeug</option>
-            <option>Kosmetik / Elektronik / Food-Contact</option>
-          </select>
-        </label>
-
-        <label>
-          Materialien
-          <input name="materials" placeholder="z. B. Sojawachs, Duftöl, Glas" />
-        </label>
-
-        <label>
-          Hersteller-/Kontaktangaben vorhanden?
-          <select name="manufacturer">
-            <option>Ja</option>
-            <option>Nein</option>
-            <option>Teilweise</option>
-          </select>
-        </label>
-
-        <label>
-          Warn-/Pflegehinweise vorhanden?
-          <select name="warnings">
-            <option>Ja</option>
-            <option>Nein</option>
-            <option>Teilweise</option>
-          </select>
-        </label>
-
-        <button class="button primary" type="submit">Beispielausgabe erzeugen</button>
-      </form>
-
-      <div id="output" class="output" aria-live="polite"></div>
-    </section>
-
-    <section id="kit" class="kit">
-<p class="eyebrow">Launch-Angebot</p>
-      <h2>Etsy GPSR Bulk Prep Kit</h2>
-      <p class="price">29 € Launchpreis</p>
-
-      <p>
-        Für Seller, die viele Listings strukturiert vorbereiten wollen — mit Sheet,
-        Produktgruppen-Workflow und Copy-Paste-Bibliothek.
-      </p>
-
-      <div class="columns">
-        <ul>
-          <li>Google-Sheet-/CSV-Vorlage</li>
-          <li>Produktgruppen-System</li>
-          <li>DE/EN-Textbausteine</li>
-        </ul>
-        <ul>
-          <li>20+ Beispieltexte</li>
-          <li>Disclaimer + Quellenbereich</li>
-          <li>High-Risk-Warnhinweise</li>
-        </ul>
-      </div>
-
-      <a class="button secondary" href="mailto:hello@sellsafekit.com?subject=SellSafeKit%20Warteliste">
-        Auf Warteliste setzen
-      </a>
-    </section>
-
-    <section id="faq" class="faq">
-      <h2>FAQ</h2>
-
-      <details>
-        <summary>Ist das Rechtsberatung?</summary>
-        <p>
-          Nein. SellSafeKit ist eine DIY-Hilfe mit Vorlagen, Checklisten und Textvorschlägen.
-          Keine individuelle rechtliche Prüfung.
-        </p>
-      </details>
-
-      <details>
-        <summary>Muss ich meinen Etsy-Shop verbinden?</summary>
-        <p>
-          Nein. Der MVP funktioniert ohne Login, API oder Shop-Zugriff.
-        </p>
-      </details>
-
-      <details>
-        <summary>Für welche Produkte ist es gedacht?</summary>
-        <p>
-          Primär für niedrigere Risikokategorien wie Deko, Papierwaren, einfache Accessoires,
-          Textilien oder POD. Für Kinderprodukte, Spielzeug, Kosmetik, Elektronik und Food-Contact
-          empfehlen wir Fachprüfung.
-        </p>
-      </details>
-    </section>
-  </main>
-
-  <footer>
-    <strong>SellSafeKit</strong><br />
-    DIY preparation aid only. Keine Rechtsberatung, keine Zertifizierung, keine Konformitätsgarantie.
-  </footer>
-
-  <script>
-    const form = document.querySelector('#gpsrForm');
-    const output = document.querySelector('#output');
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const data = Object.fromEntries(new FormData(form));
-      const highRisk = /Kinder|Spielzeug|Kosmetik|Elektronik|Food/.test(data.category);
-
-      const missing = [];
-
-      if (data.manufacturer !== 'Ja') {
-        missing.push('Hersteller-/Kontaktblock prüfen oder ergänzen');
-      }
-
-      if (data.warnings !== 'Ja') {
-        missing.push('Warn-/Pflegehinweise prüfen oder ergänzen');
-      }
-
-      if (!data.materials.trim()) {
-        missing.push('Materialien ergänzen');
-      }
-
-      const missingItems = missing.length
-        ? missing.map(item => `<li>${item}</li>`).join('')
-        : '<li>Keine offensichtliche Lücke aus diesen Basisangaben. Bitte trotzdem fachlich prüfen.</li>';
-
-      output.className = 'output show';
-
-      output.innerHTML = `
-        <h3>Beispielausgabe für: ${escapeHtml(data.product)}</h3>
-
-        <p><strong>Kategorie:</strong> ${escapeHtml(data.category)}</p>
-
-        ${highRisk
-          ? '<p style="color:#8a4b12"><strong>Fachprüfung empfohlen:</strong> Diese Kategorie kann zusätzliche Spezialpflichten haben.</p>'
-          : ''
-        }
-
-        <p><strong>Fehlende/zu prüfende Angaben:</strong></p>
-        <ul>${missingItems}</ul>
-
-        <p>
-          <strong>Copy-Paste-Entwurf:</strong><br>
-          Produkt: ${escapeHtml(data.product)}<br>
-          Materialien: ${escapeHtml(data.materials || '[Materialien ergänzen]')}<br>
-          Sicherheits-/Pflegehinweise: [produktspezifisch ergänzen]
-        </p>
-
-        <p>
-          <em>
-            Disclaimer: Nur DIY-Textvorschlag, keine Rechtsberatung, keine Zertifizierung,
-            keine Konformitätsgarantie.
-          </em>
-        </p>
-      `;
-    });
-
-    function escapeHtml(value) {
-      return String(value).replace(/[&<>'"]/g, function (char) {
-        return {
-          '&': '&amp;',
-          '<': '&lt;',
-          '>': '&gt;',
-          "'": '&#39;',
-          '"': '&quot;'
-        }[char];
-      });
-    }
-  </script>
-</body>
-</html>
